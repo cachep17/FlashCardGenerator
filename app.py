@@ -1,5 +1,9 @@
 import streamlit as st
 import os
+
+# Read Google API key from Streamlit secrets
+google_api_key = st.secrets["GOOGLE_API_KEY"]
+
 import pandas as pd
 import time
 from utils import extract_text_from_pdf, extract_text_from_pptx
@@ -195,46 +199,37 @@ with st.sidebar:
         else 0
     )
 
-    ai_method = st.selectbox(
-        lang_manager.get_text("ai_method"),
-        options=ai_method_options,
-        format_func=lambda x: (
-            ai_methods_dict.get(x, x) if isinstance(ai_methods_dict, dict) else x
-        ),
-        index=current_method_index,
-        help="Chọn phương pháp AI phù hợp cho deployment online",
-    )
-    st.session_state.ai_method = ai_method
+    ai_method = "gemini"
 
-    # API Key cho Gemini
-    if ai_method == "gemini":
-        api_key_input = st.text_input(
-            lang_manager.get_text("api_key_label"),
-            type="password",
-            help=lang_manager.get_text("api_key_help"),
-            value=st.session_state.api_key if st.session_state.api_key else "",
-        )
+    # Remove API Key input for Gemini
+    # if ai_method == "gemini":
+    #     api_key_input = st.text_input(
+    #         lang_manager.get_text("api_key_label"),
+    #         type="password",
+    #         help=lang_manager.get_text("api_key_help"),
+    #         value=st.session_state.api_key if st.session_state.api_key else "",
+    #     )
+    #
+    #     if api_key_input != st.session_state.api_key:
+    #         st.session_state.api_key = api_key_input if api_key_input.strip() else None
 
-        if api_key_input != st.session_state.api_key:
-            st.session_state.api_key = api_key_input if api_key_input.strip() else None
+    # st.session_state.use_sample_cards = st.checkbox(
+    #     lang_manager.get_text("use_sample_cards"),
+    #     value=st.session_state.use_sample_cards,
+    #     help=lang_manager.get_text("use_sample_cards_help"),
+    # )
 
-    st.session_state.use_sample_cards = st.checkbox(
-        lang_manager.get_text("use_sample_cards"),
-        value=st.session_state.use_sample_cards,
-        help=lang_manager.get_text("use_sample_cards_help"),
-    )
-
-    st.markdown("---")
-    if ai_method == "gemini":
-        st.markdown(
-            f"""
-        ### {lang_manager.get_text("gemini_api_guide", default="Cách Lấy API Key Gemini (Miễn Phí)")}
-        1. {lang_manager.get_text("visit_studio", default="Truy cập")} [Google AI Studio](https://makersuite.google.com/app/apikey)
-        2. {lang_manager.get_text("login_google", default="Đăng nhập bằng tài khoản Google")}
-        3. {lang_manager.get_text("create_api_key", default="Tạo API key")}
-        4. {lang_manager.get_text("copy_paste", default="Sao chép và dán vào đây")}
-        """
-        )
+    # st.markdown("---")
+    # if ai_method == "gemini":
+    #     st.markdown(
+    #         f"""
+    #     ### {lang_manager.get_text("gemini_api_guide", default="Cách Lấy API Key Gemini (Miễn Phí)")}
+    #     1. {lang_manager.get_text("visit_studio", default="Truy cập")} [Google AI Studio](https://makersuite.google.com/app/apikey)
+    #     2. {lang_manager.get_text("login_google", default="Đăng nhập bằng tài khoản Google")}
+    #     3. {lang_manager.get_text("create_api_key", default="Tạo API key")}
+    #     4. {lang_manager.get_text("copy_paste", default="Sao chép và dán vào đây")}
+    #     """
+    #     )
 
 # Navigation
 nav_col1, nav_col2, nav_col3 = st.columns(3)
@@ -310,7 +305,7 @@ if st.session_state.view_mode == "input":
                 try:
                     clear_flashcards()
                     # Sử dụng online_generator với Gemini API key
-                    api_key = st.session_state.api_key
+                    api_key = google_api_key
                     st.session_state.flashcards = online_generator.generate_flashcards(
                         content_text,
                         subject,
