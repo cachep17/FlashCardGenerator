@@ -1,0 +1,158 @@
+/* Additional CSS fixes for Vietnamese fonts and responsive design */
+
+/* Improved font stack for Vietnamese */
+body, input, textarea, select, button {
+  font-family: "Poppins", "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "Liberation Sans", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Hero section padding fix for header overlap */
+.hero {
+  padding-top: 100px !important;
+}
+
+/* High DPI and Zoom Support */
+@media screen and (min-resolution: 144dpi), screen and (min-resolution: 1.5dppx) {
+  .hero {
+    padding-top: 120px !important;
+  }
+  
+  .navbar {
+    padding: 1.2rem 0 !important;
+  }
+  
+  .hero-title {
+    font-size: 3.2rem !important;
+    line-height: 1.15 !important;
+  }
+  
+  .banner-text h3 {
+    font-size: 1.3rem !important;
+  }
+  
+  .banner-text p {
+    font-size: 0.95rem !important;
+  }
+}
+
+/* Ultra High DPI (200% zoom and above) */
+@media screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx) {
+  .hero {
+    padding-top: 140px !important;
+  }
+  
+  .hero-title {
+    font-size: 3rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem !important;
+  }
+  
+  .navbar {
+    padding: 1.5rem 0 !important;
+  }
+  
+  .nav-logo {
+    font-size: 1.4rem !important;
+  }
+}
+
+/* Font rendering improvements for Vietnamese text */
+.hero-title, .hero-subtitle, .banner-text, .section-title {
+  font-feature-settings: "kern" 1;
+  font-variant-ligatures: common-ligatures;
+  letter-spacing: -0.02em;
+  word-spacing: 0.02em;
+}
+
+/* Fix text rendering issues on Windows with high DPI */
+@media screen and (-webkit-min-device-pixel-ratio: 1.25), 
+       screen and (min-resolution: 120dpi) {
+  body {
+    -webkit-text-stroke: 0.01em transparent;
+  }
+  
+  .hero-title {
+    -webkit-text-stroke: 0.005em transparent;
+  }
+}
+
+/* Tablet responsive fixes */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero {
+    padding-top: 90px !important;
+  }
+  
+  .hero-title {
+    font-size: 3rem !important;
+  }
+  
+  .container {
+    padding: 0 30px !important;
+  }
+}
+
+/* Large desktop adjustments */
+@media (min-width: 1400px) {
+  .hero {
+    padding-top: 120px !important;
+  }
+  
+  .hero-container {
+    max-width: 1400px !important;
+  }
+  
+  .container {
+    max-width: 1400px !important;
+  }
+}
+
+/* Mobile specific font and layout fixes */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 80px !important;
+  }
+
+  .hero-title {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    text-align: center !important;
+  }
+
+  .hero-buttons {
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 70px !important;
+  }
+
+  .hero-title {
+    font-size: 2rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem !important;
+  }
+
+  .hero-buttons {
+    flex-direction: column !important;
+    gap: 0.8rem !important;
+  }
+
+  .hero-stats {
+    gap: 1rem !important;
+  }
+}

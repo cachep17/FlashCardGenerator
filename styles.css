@@ -6,7 +6,9 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", "Inter", "Segoe UI", "Roboto", "Helvetica Neue",
+    "Arial", "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   line-height: 1.6;
   color: #333;
   overflow-x: hidden;
@@ -295,6 +297,7 @@ body {
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding-top: 100px; /* Add padding to avoid header overlap */
 }
 
 .hero-container {
@@ -1304,6 +1307,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
+  color: #fff;
 }
 
 .footer-logo {
@@ -1317,7 +1321,7 @@ body {
 
 .footer-section h4 {
   margin-bottom: 1rem;
-  color: var(--white);
+  color: #fff;
 }
 
 .footer-section ul {
@@ -1335,7 +1339,7 @@ body {
 }
 
 .footer-section ul li a:hover {
-  color: var(--white);
+  color: #fff;
 }
 
 .social-links {
@@ -1423,7 +1427,7 @@ body {
   padding: 1rem 1.5rem;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-medium);
-  transform: translateX(100%);
+  transform: translateX(150%);
   transition: var(--transition);
   z-index: 9999;
 }
@@ -1529,6 +1533,20 @@ body {
     font-size: 0.9rem;
   }
 
+  .hero {
+    padding-top: 80px; /* Reduce padding on mobile */
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
   .hero-banner {
     padding: 1.5rem;
     margin-bottom: 1.5rem;
@@ -1548,12 +1566,41 @@ body {
   .banner-text h3 {
     font-size: 1.2rem;
   }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-menu {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
   .nav-controls {
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .hero {
+    padding-top: 70px; /* Even less padding on small mobile */
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .hero-stats {
+    gap: 1rem;
   }
 
   .hero-banner {
@@ -1582,126 +1629,85 @@ body {
   }
 }
 
-/* API Key Dialog */
-.api-key-dialog {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10000;
-}
-
-.dialog-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(5px);
-}
-
-.dialog-content {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-heavy);
-  max-width: 500px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-.dialog-content h3 {
-  color: var(--text-dark);
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-}
-
-.dialog-content p {
-  color: var(--text-light);
-  margin-bottom: 1rem;
-  line-height: 1.6;
-}
-
-.dialog-content input {
-  width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #e1e8ed;
-  border-radius: 10px;
-  font-family: inherit;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  transition: var(--transition);
-  background: var(--white);
-  color: var(--text-dark);
-}
-
-.dialog-content input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.help-text {
-  font-size: 0.9rem;
-  color: var(--text-light);
-  margin-bottom: 1.5rem;
-}
-
-.help-text a {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.help-text a:hover {
-  text-decoration: underline;
-}
-
-.dialog-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-}
-
-.dialog-buttons .btn {
-  min-width: 100px;
-}
-
-/* Dark theme support for dialog */
-[data-theme="dark"] .dialog-content {
-  background: var(--white);
-  color: var(--text-dark);
-}
-
-[data-theme="dark"] .dialog-content input {
-  background: var(--white);
-  color: var(--text-dark);
-  border-color: #444;
-}
-
-[data-theme="dark"] .dialog-content input:focus {
-  border-color: var(--primary-color);
-}
-
-/* Responsive dialog */
-@media (max-width: 768px) {
-  .dialog-content {
-    padding: 1.5rem;
-    margin: 1rem;
+/* High DPI and Zoom Support */
+@media screen and (min-resolution: 144dpi),
+  screen and (min-resolution: 1.5dppx) {
+  .hero {
+    padding-top: 120px; /* Extra padding for high DPI displays */
   }
 
-  .dialog-buttons {
-    flex-direction: column;
+  .navbar {
+    padding: 1.2rem 0; /* Slightly more padding */
   }
 
-  .dialog-buttons .btn {
-    width: 100%;
+  .hero-title {
+    font-size: 3.2rem; /* Slightly smaller on high DPI to prevent overflow */
+    line-height: 1.15;
+  }
+
+  .banner-text h3 {
+    font-size: 1.3rem;
+  }
+
+  .banner-text p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Ultra High DPI (200% zoom and above) */
+@media screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx) {
+  .hero {
+    padding-top: 140px;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .navbar {
+    padding: 1.5rem 0;
+  }
+
+  .nav-logo {
+    font-size: 1.4rem;
+  }
+}
+
+/* Font rendering improvements for Vietnamese text */
+body,
+.hero-title,
+.hero-subtitle,
+.banner-text {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1;
+  font-variant-ligatures: common-ligatures;
+}
+
+/* Specific Vietnamese character support */
+.hero-title,
+.section-title,
+.banner-text h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  word-spacing: 0.02em;
+}
+
+/* Fix text rendering issues on Windows with high DPI */
+@media screen and (-webkit-min-device-pixel-ratio: 1.25),
+  screen and (min-resolution: 120dpi) {
+  body {
+    -webkit-text-stroke: 0.01em transparent;
+  }
+
+  .hero-title {
+    -webkit-text-stroke: 0.005em transparent;
   }
 }
 
