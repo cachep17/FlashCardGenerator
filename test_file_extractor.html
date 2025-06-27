@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test File Extractor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-area {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .result {
+            background: #f0f0f0;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .success {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+    </style>
+    <!-- PDF.js for PDF extraction -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <!-- JSZip for PPTX/DOCX extraction -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+    <h1>File Content Extractor Test</h1>
+    
+    <div class="test-area">
+        <h3>Upload a file to test extraction</h3>
+        <input type="file" id="fileInput" accept=".pdf,.pptx,.docx">
+        <p>Supports: PDF, PPTX, DOCX files</p>
+    </div>
+    
+    <div id="result" class="result" style="display: none;">
+        <h3>Extraction Result:</h3>
+        <p id="fileInfo"></p>
+        <textarea id="extractedContent" readonly></textarea>
+    </div>
+    
+    <script src="file-extractor.js"></script>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const resultDiv = document.getElementById('result');
+            const fileInfo = document.getElementById('fileInfo');
+            const extractedContent = document.getElementById('extractedContent');
+            
+            try {
+                fileInfo.textContent = `Processing ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)...`;
+                resultDiv.style.display = 'block';
+                resultDiv.className = 'result';
+                extractedContent.value = 'Processing...';
+                
+                // Validate file
+                fileExtractor.validateFile(file);
+                
+                // Extract content
+                const result = await fileExtractor.extractContent(file);
+                
+                let info = `✅ Successfully extracted from ${file.name}`;
+                if (result.pages) {
+                    info += ` (${result.pages} pages)`;
+                } else if (result.slides) {
+                    info += ` (${result.slides} slides)`;
+                }
+                info += ` - ${result.content.length} characters`;
+                
+                fileInfo.textContent = info;
+                extractedContent.value = result.content;
+                resultDiv.className = 'result success';
+                
+            } catch (error) {
+                console.error('Error:', error);
+                fileInfo.textContent = `❌ Error: ${error.message}`;
+                extractedContent.value = '';
+                resultDiv.className = 'result error';
+            }
+        });
+    </script>
+</body>
+</html>

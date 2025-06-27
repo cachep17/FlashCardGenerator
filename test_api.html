@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>API Test</title>
+</head>
+
+<body>
+    <h1>Gemini API Test</h1>
+    <button onclick="testAPI()">Test API</button>
+    <div id="result"></div>
+
+    <script src="config.js"></script>
+    <script>
+        async function testAPI() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Testing...';
+
+            try {
+                const success = await window.config.testApiConnection();
+                if (success) {
+                    resultDiv.innerHTML = '<p style="color: green;">API Connection Successful!</p>';
+                } else {
+                    resultDiv.innerHTML = '<p style="color: red;">API Connection Failed!</p>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

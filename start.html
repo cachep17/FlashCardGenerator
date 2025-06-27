@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlashCard Generator - Start</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 500px;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .features {
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .feature {
+      margin: 10px 0;
+      color: #666;
+    }
+
+    .feature::before {
+      content: "✓";
+      color: #4CAF50;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🎓 FlashCard Generator</h1>
+    <p>Tạo thẻ học tập thông minh với AI Gemini</p>
+
+    <div class="features">
+      <div class="feature">AI tự động tạo câu hỏi từ nội dung</div>
+      <div class="feature">Hỗ trợ tiếng Việt và tiếng Anh</div>
+      <div class="feature">Giao diện sáng/tối</div>
+      <div class="feature">Lưu trữ và quản lý bộ thẻ</div>
+      <div class="feature">Chế độ học tập thông minh</div>
+    </div>
+
+    <br><br>
+    <a href="index.html" class="btn">🚀 Bắt đầu sử dụng</a>
+
+    <p style="margin-top: 30px; font-size: 14px; color: #999;">
+      Chỉ cần mở file này trong trình duyệt web. Không cần cài đặt gì thêm!
+    </p>
+  </div>
+</body>
+
+</html>
